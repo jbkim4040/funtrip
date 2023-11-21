@@ -1,13 +1,17 @@
 package com.main.funtrip.user.controller;
 
+import com.main.funtrip.user.service.UserService;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/api")
 @RequiredArgsConstructor
 public class UserController {
+
+    private final UserService userService;
 
     @PostMapping("/v1")
     public String login() {
@@ -27,5 +31,13 @@ public class UserController {
     @PutMapping("/v1/info")
     public String modifyUserInfo() {
         return "성공적으로 수정됨";
+    }
+
+    @ApiModelProperty
+    @GetMapping("/v1/{userId}")
+    public String test(@PathVariable String userId) {
+        userService.test(userId);
+
+        return "데이터 저장 성공";
     }
 }
