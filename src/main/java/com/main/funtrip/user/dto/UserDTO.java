@@ -1,11 +1,23 @@
 package com.main.funtrip.user.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
-    private String userId;
 
-    private String userPw;
+    @ApiModelProperty(name = "유저 ID")
+    private String id;
 
-    private String userNm;
+    @ApiModelProperty(name = "유저 이메일")
+    private String email;
 
-    private String userEmail;
+    @ApiModelProperty(name = "유저 비밀번호")
+    private String password;
 }

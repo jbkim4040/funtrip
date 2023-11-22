@@ -22,22 +22,50 @@ repositories {
 }
 
 dependencies {
+    /** OAuth2 사용을 위한 의존성 */
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.7.8'
+
+    /** 스프링시큐리티 사용을 위한 의존성 */
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    
+    /** */
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    /** AOP를 위한 의존성 */
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    
+    /** */
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    /** OracleDB 접속을 위한 의존성 */
     runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
     implementation 'com.oracle.database.security:osdt_cert'
     implementation 'com.oracle.database.security:oraclepki'
     implementation 'com.oracle.database.security:osdt_core'
+
+    /** lombok 사용을 위한 의존성 */
     compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
+    
+    /** */
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    /** */
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    
+    /** swagger 사용을 위한 의존성 */
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    
+    /** Mapper를 위한 의존성 */
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+    testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+    /** SCryptEncoder를 위한 의존성 */
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
 }
 
 tasks.named('test') {

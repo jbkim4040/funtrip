@@ -1,10 +1,11 @@
 package com.main.funtrip.user.controller;
 
+import com.main.funtrip.user.dto.UserDTO;
 import com.main.funtrip.user.service.UserService;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user/api")
@@ -13,31 +14,33 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/v1")
-    public String login() {
-        return "성공적으로 로그인 됨";
+    @PostMapping("/v1/login")
+    public boolean logIn(@RequestBody UserDTO userDTO) {
+        return userService.logIn(userDTO);
+    }
+
+    @GetMapping("/v1/logout")
+    public boolean logOut() {
+        return userService.logOut();
     }
 
     @PostMapping("/v1/info")
-    public String registerUserInfo() {
-        return "성공적으로 등록됨";
+    public List<UserDTO> registerUserInfo(@RequestBody UserDTO userDTO) throws Exception {
+        return userService.registerUserInfo(userDTO);
     }
 
     @GetMapping("/v1/info")
-    public String getUserInfo(String userId) {
-        return userId + "님의 데이터가 성공적으로 조회됨";
+    public UserDTO getUserInfo(String userId) {
+        return userService.getUserInfo(userId);
     }
 
     @PutMapping("/v1/info")
-    public String modifyUserInfo() {
-        return "성공적으로 수정됨";
+    public List<UserDTO> modifyUserInfo(@RequestBody UserDTO userDTO) throws Exception {
+        return userService.modifyUserInfo(userDTO);
     }
 
-    @ApiModelProperty
-    @GetMapping("/v1/{userId}")
-    public String test(@PathVariable String userId) {
-        userService.test(userId);
-
-        return "데이터 저장 성공";
+    @DeleteMapping("/v1/info")
+    public List<UserDTO> deleteUserInfo(String userId) {
+        return userService.deleteUserInfo(userId);
     }
 }
