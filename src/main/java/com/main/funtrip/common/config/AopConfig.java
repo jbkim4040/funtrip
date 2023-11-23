@@ -29,11 +29,15 @@ public class AopConfig {
     @Before("standardForUserInfoSecurity()")
     public void encryptUserInfo(JoinPoint joinPoint) {
         try{
-            UserDTO userDTO = (UserDTO)joinPoint.getArgs()[0];
-            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            log.info("PASSWORD ENCRYPTS SUCCESSFUL!!!");
+            for(Object obj : joinPoint.getArgs()) {
+                if(obj instanceof UserDTO){
+                    UserDTO userDTO = (UserDTO)obj;
+                    userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+                    log.info("PASSWORD ENCRYPTED SUCCESSFUL!!!");
+                }
+            }
         }catch(Exception e) {
-            log.error("PASSWORD ENCRYPTS FAILED...");
+            log.error("PASSWORD ENCRYPTED FAILED...");
         }
     }
 }
