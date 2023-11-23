@@ -27,7 +27,7 @@ public class AopConfig {
     public void standardForUserInfoSecurity() {}
 
     @Before("standardForUserInfoSecurity()")
-    public void beforeParameterLog(JoinPoint joinPoint) {
+    public void encryptUserInfo(JoinPoint joinPoint) {
         try{
             UserDTO userDTO = (UserDTO)joinPoint.getArgs()[0];
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
